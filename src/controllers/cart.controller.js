@@ -49,3 +49,16 @@ export const getCartItems = async (req, res) => {
     });
     }
   };
+
+  export const delCart = async (req, res, next) => {
+    try {
+     const data = await CartService.delCart(req.params, req.body);
+      res.status(HttpStatus.OK).json({
+        code: HttpStatus.OK,
+         data: data,
+        message: 'Book in Cart deleted successfully'
+      });
+    } catch (error) {
+      next(error);
+    }
+  };

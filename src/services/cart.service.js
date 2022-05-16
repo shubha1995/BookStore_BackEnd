@@ -85,3 +85,24 @@ export const cartUpdate = async (params, body) => {
 
 
 };
+
+
+export const delCart = async (params, body) => {
+    const cartPresent = await Cart.findOne({ userId: body.userId })
+    console.log(cartPresent)
+    let book = await cartPresent.book.findIndex(bookInCart => bookInCart._id == params._id);
+    cartPresent.book.splice(book, 1)
+    if (book) {
+        const updateCart = await Cart.findByIdAndUpdate({
+            _id: cartPresent._id
+        }, {
+            $set: {
+                book: cartPresent.book,
+
+            },
+        }, { new: true });
+        return updateCart;
+    } else {
+        throw new Error('Book doesnt exists')
+    }
+}

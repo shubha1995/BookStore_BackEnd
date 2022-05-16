@@ -14,5 +14,8 @@ router.get('/get/:_id', userAuth, cartController.getCartItems);
  //to update the cart
  router.put('/update/:_id', userAuth, cartController.cartUpdate);
 
+ //to delete cart items
+ router.put('/delete/:id', userAuth, cartController.delCart)
+
 
 export default router;
