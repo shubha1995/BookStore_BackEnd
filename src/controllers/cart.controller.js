@@ -18,4 +18,34 @@ export const createCart = async (req, res) => {
   }
 };
 
+export const getCartItems = async (req, res) => {
+    try {
+        const data = await CartService.getCartItems(req.body);
+        res.status(HttpStatus.OK).json({
+        code: HttpStatus.OK,
+        data: data,
+        message: 'All items in Cart fetched successfully'
+    });
+    }catch (error) {
+        res.status(HttpStatus. NOT_FOUND).json({
+        code: HttpStatus. NOT_FOUND,
+        message: `${error}`
+    });
+    }
+  };
 
+  export const cartUpdate = async (req, res) => {
+    try {
+        const data = await CartService.cartUpdate(req.params, req.body);
+        res.status(HttpStatus.OK).json({
+        code: HttpStatus.OK,
+        data: data,
+        message: ' Cart updated successfully'
+    });
+    }catch (error) {
+        res.status(HttpStatus. CONFLICT).json({
+        code: HttpStatus. CONFLICT,
+        message: `${error}`
+    });
+    }
+  };

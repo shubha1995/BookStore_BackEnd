@@ -57,6 +57,4 @@ export const authenticate = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-// eslint-disable-next-line prettier/prettier
-// eslint-disable-next-line prettier/prettier
 };

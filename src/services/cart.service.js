@@ -1,4 +1,7 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable max-len */
+/* eslint-disable eqeqeq */
+/* eslint-disable prettier/prettier */
 import Cart from '../models/cart.model';
 import Book from '../models/book.model';
 
@@ -44,4 +47,41 @@ export const createCart = async (params, body) => {
       return newCart;
     }
   }
+};
+
+export const getCartItems = async (body) => {
+    const data = await Cart.findOne({ userId: body.userId });
+    console.log(data)
+    if (data.length == 0) {
+        throw new Error('Cart Not Present')
+    }
+    else {
+        return data;
+    }
+};
+
+export const cartUpdate = async (params, body) => {
+    const cartPresent = await Cart.findOne({ userId: body.userId });
+    console.log(cartPresent)
+    if(cartPresent){
+        const bookInCart = await cartPresent.book.find(book => book._id == params._id)
+        console.log('bookincart---',bookInCart)
+        if (bookInCart){
+            bookInCart.quantity = body.quantity;
+           const cartUpdate = await Cart.findByIdAndUpdate({ _id: cartPresent._id},
+            {
+                $set: {
+                    book: cartPresent.book
+                }
+            },
+            {new:true})
+            return cartUpdate
+        }else{
+            throw new Error('Book doesnt exist in cart')
+        }
+    }else{
+        throw new Error('Cart doesnt exist')
+    }
+
+
 };

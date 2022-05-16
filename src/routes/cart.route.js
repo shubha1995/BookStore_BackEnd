@@ -8,5 +8,11 @@ const router = express.Router();
 //to create a cart
 router.post('/create/:_id', userAuth, cartController.createCart);
 
+//to get all items of cart
+router.get('/get/:_id', userAuth, cartController.getCartItems);
+
+ //to update the cart
+ router.put('/update/:_id', userAuth, cartController.cartUpdate);
+
 
 export default router;
