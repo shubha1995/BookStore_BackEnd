@@ -19,6 +19,6 @@ export const sendMail = async (email, token) => {
     to: email, // list of receivers
     subject: 'Password Reset Link', // Subject line
     text: 'Test', // plain text body
-    html: `<h1>Link:><a href="http://localhost:4000/resetPassword/${token}">click here</a></h1>` // html body
+    html: `<h1>Link:><a href="http://localhost:4000/resetPassword/${token}">click here for reset password</a></h1>` // html body
   });
 };
