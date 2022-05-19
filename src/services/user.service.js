@@ -57,3 +57,15 @@ export const forgetPassword = async (body) => {
   }
 
 };
+
+// Reset Api
+export const resetPass = async (body) => {
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(body.password, salt);
+  body.password = hashPassword;
+  const data = await User.findOneAndUpdate({ _id: body.userID },
+    { password: body.password },
+    { new: true });
+  return data;
+
+};
