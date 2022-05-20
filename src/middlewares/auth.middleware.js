@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-trailing-spaces */
 import HttpStatus from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 
@@ -26,8 +27,8 @@ export const userAuth = async (req, res, next) => {
           message: 'Token for Authorization is Incorrect'
         };
       } else {
-        req.body['data'] = verifiedToken;
-        //  req.body['userId'] = verifiedToken;
+        //  req.body['data'] = verifiedToken;
+        req.body['userId'] = verifiedToken.id;
         next();
       }
     });
