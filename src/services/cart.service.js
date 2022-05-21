@@ -51,7 +51,7 @@ export const createCart = async (params, body) => {
 export const getCartItems = async (body) => {
     const data = await Cart.findOne({ userId: body.userId });
     console.log(data)
-    if (data.length == 0) {
+    if (data.length === 0) {
         throw new Error('Cart Not Present')
     }
     else {
@@ -63,7 +63,7 @@ export const cartUpdate = async (params, body) => {
     const cartPresent = await Cart.findOne({ userId: body.userId });
     console.log(cartPresent)
     if(cartPresent){
-        const bookInCart = await cartPresent.book.find(book => book._id == params._id)
+        const bookInCart = await cartPresent.book.find(book => book._id === params._id)
         console.log('bookincart---',bookInCart)
         if (bookInCart){
             bookInCart.quantity = body.quantity;
@@ -88,8 +88,7 @@ export const cartUpdate = async (params, body) => {
 
 export const delCart = async (params, body) => {
     const cartPresent = await Cart.findOne({ userId: body.userId })
-    console.log(cartPresent)
-    let book = await cartPresent.book.findIndex(bookInCart => bookInCart._id == params._id);
+    let book = await cartPresent.book.findIndex(bookInCart => bookInCart._id === params._id);
     cartPresent.book.splice(book, 1)
     if (book) {
         const updateCart = await Cart.findByIdAndUpdate({

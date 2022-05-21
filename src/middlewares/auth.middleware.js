@@ -27,7 +27,6 @@ export const userAuth = async (req, res, next) => {
           message: 'Token for Authorization is Incorrect'
         };
       } else {
-        //  req.body['data'] = verifiedToken;
         req.body['userId'] = verifiedToken.id;
         next();
       }
